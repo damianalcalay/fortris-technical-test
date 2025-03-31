@@ -53,7 +53,7 @@ Default credentials:
 
 ---
 
-# **- Exercise 1 - SQL Query Test 2 – Department Headcount**
+# **- Exercise 2 - SQL Query Test 2 – Department Headcount**
 
 - **\*Objective\*\***: Generate a report showing each department's headcount (number of employees), including those with no employees.
 - **\*Concepts demonstrated\*\***:
