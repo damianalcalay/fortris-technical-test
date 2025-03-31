@@ -1,8 +1,12 @@
-# **FORTRIS Technical Test – SQL Section**
+# **FORTRIS Technical  – SQL Section**
 
 This repository contains technical test solutions for the Application Support Engineer position at Fortris.
 
 Each exercise is implemented in its own folder as a fully functional Dockerized environment. The structure includes seed data, query files, and detailed documentation to demonstrate hands-on skills with SQL, NoSQL, Docker, Python, Git and Linux.
+
+---
+
+# **- Exercise 1 - SQL Query Test 1 – Employees and Departments**
 
 ---
 
@@ -16,19 +20,22 @@ docker-compose up -d
 
 3. Each test runs a separate PostgreSQL container mapped to a different local port:
 
-- sql-query-test-1 → Port 5432
+- sql-query-exercise-1 → Port 5432
 
-- sql-query-test-2 → Port 5434
+- sql-query-exercise-2 → Port 5434
 
 4. To execute the query of each test:
 
-- \***\*Test 1\*\***:
+- \***\*Exercise 1\*\***:
+```jsx
+psql -h localhost -U demo -d company -p 5432 -f sql-query-exercise-1/queries/query_employees.sql
+```
 
-psql -h localhost -U demo -d company -p 5432 -f sql-query-test-1/queries/query_employees.sql
+- \***\*Exercise 2\*\***:
 
-- \***\*Test 2\*\***:
-
-psql -h localhost -U demo -d company -p 5434 -f sql-query-test-2/queries/query_headcount.sql
+```jsx
+psql -h localhost -U demo -d company -p 5434 -f sql-query-exercise-2/queries/query_headcount.sql
+```
 
 Default credentials:
 
@@ -37,8 +44,6 @@ Default credentials:
 - Password: demo
 
 ---
-
-# **- Exercise 1 - SQL Query Test 1 – Employees and Departments**
 
 - **\*Objective\*\***: Retrieve all employees with their job title and department name.
 - **\*Concepts demonstrated\*\***:
@@ -53,7 +58,11 @@ Default credentials:
 
 ---
 
-# **- Exercise 2 - SQL Query Test 2 – Department Headcount**
+# **- Exercise 2 - SQL Query Test 2 – Department Headcount** Do the same as 1st exercise but using this query instead.
+
+```jsx
+psql -h localhost -U demo -d company -p 5434 -f sql-query-exercise-2/queries/query_headcount.sql
+```
 
 - **\*Objective\*\***: Generate a report showing each department's headcount (number of employees), including those with no employees.
 - **\*Concepts demonstrated\*\***:
@@ -91,11 +100,11 @@ This exercise demonstrates how to query a MongoDB collection named `orders`, pre
 
 All queries from this exercise have been included in a single script for easy testing and validation.
 
-📄 \***\*Script path\*\***: `mongo-query-test-3/queries/mongo-query.js`
+📄 \***\*Script path\*\***: `mongo-query-exercise-3/queries/mongo-query.js`
 
 You can execute the entire script with the following command:
 
-mongosh --host localhost --port 27017 mongo-query-test-3/queries/mongo-query.js
+mongosh --host localhost --port 27017 mongo-query-exercise-3/queries/mongo-query.js
 
 **## How to Connect to test app with mongosh terminal**
 
