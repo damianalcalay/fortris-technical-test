@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  web:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    environment:
+      - DEMO_VAR=initial_value
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure

@@ -1,0 +1,11 @@
+# Runtime dependencies
+pymongo==4.7.2
+pandas==2.2.2
+
+# Development dependencies
+pytest==8.2.1
+pylint==3.1.0
+
+
+## Run this command to install all dependencies from root folder:
+## pip install -r mongo-query-exercise-3/python-exercise-4/requirements.txt
