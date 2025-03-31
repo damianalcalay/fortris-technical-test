@@ -173,17 +173,17 @@ db.orders.aggregate([
 
 	{
 
-	$group: {
+		$group: {
 
-	_id: {
+			_id: {
 
-	$dateToString: { format: "%Y-%m-%d", date: "$Date" }
+			$dateToString: { format: "%Y-%m-%d", date: "$Date" }
 
-	},
+		},
 
-	totalAmount: { $sum: "$Amount" }
+		totalAmount: { $sum: "$Amount" }
 
-	}
+		}
 
 	},
 
@@ -202,17 +202,17 @@ db.orders.aggregate([
 
 	{
 
-	$group: {
+		$group: {
 
-	_id: {
+			_id: {
+	
+			$dateToString: { format: "%Y-%m-%d", date: "$Date" }
 
-	$dateToString: { format: "%Y-%m-%d", date: "$Date" }
+		},
 
-	},
+		transactionCount: { $sum: 1 }
 
-	transactionCount: { $sum: 1 }
-
-	}
+		}
 
 	},
 
@@ -237,8 +237,7 @@ This exercise demonstrates how to connect to a MongoDB collection, extract speci
 > Using the previous MongoDB collection example:
 
 ```jsx
-{ "_id": "ObjectId('60b8d295f1a7f2355e9f1d8c'), "Date": "2024-06-20T15:30:00Z",
-"Amount": 250.75, "txHash": "..." }
+{ "_id": "ObjectId('60b8d295f1a7f2355e9f1d8c'), "Date": "2024-06-20T15:30:00Z", "Amount": 250.75, "txHash": "..." }
 ```
 
 Write a Python script that:
