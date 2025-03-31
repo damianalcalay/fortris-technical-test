@@ -2,7 +2,7 @@
 
 This repository contains technical test solutions for the Application Support Engineer position at Fortris.
 
-Each exercise is implemented in its own folder as a fully functional Dockerized PostgreSQL environment. The structure includes seed data, query files, and detailed documentation to demonstrate hands-on skills with SQL.
+Each exercise is implemented in its own folder as a fully functional Dockerized environment. The structure includes seed data, query files, and detailed documentation to demonstrate hands-on skills with SQL, NoSQL, Docker, Python, Git and Linux.
 
 ---
 
