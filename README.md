@@ -73,7 +73,7 @@ A list of all 11 departments with accurate headcounts, descending by number of e
 
 ---
 
-## 🧠 Exercise 3 - MongoDB: Querying the `orders` Collection
+## Exercise 3 - MongoDB: Querying the `orders` Collection
 
 This exercise demonstrates how to query a MongoDB collection named `orders`, pre-seeded with a dataset using an `init.js` script. The collection stores transaction records with the following structure:
 
@@ -96,12 +96,12 @@ You can execute the entire script with the following command:
 
 mongosh --host localhost --port 27017 mongo-query-test-3/queries/mongo-query.js
 
-## 🚀 How to Connect to test app with mongosh terminal
+## How to Connect to test app with mongosh terminal
 
 - mongosh --host localhost --port 27017
 - use testdb
 
-## 🔎 1. Get the Amount of a specific \_id
+## 1. Get the Amount of a specific \_id
 
 - db.orders.find(
 - { \_id: ObjectId("60b8d295f1a7f2355e9f1d8c") },
@@ -111,14 +111,14 @@ mongosh --host localhost --port 27017 mongo-query-test-3/queries/mongo-query.js
 - Why use find?
 - Since we're retrieving a single document by its \_id, which is indexed by default, find is the most efficient and readable choice. There's no need to use an aggregation pipeline unless we need additional transformation.
 
-## 🔎 2. Filter orders from May 1 to June 1, 2024
+## 2. Filter orders from May 1 to June 1, 2024
 
-- db.orders.find({
-- Date: {
--     $gte: new Date("2024-05-01T00:00:00Z"),
--     $lt: new Date("2024-06-01T00:00:00Z")
-- }
-- })
+db.orders.find({
+Date: {
+$gte: new Date("2024-05-01T00:00:00Z"),
+$lt: new Date("2024-06-01T00:00:00Z")
+}
+})
 
 - Why use find?
 - This is a basic range query, ideal for find as no aggregation or data restructuring is needed.
@@ -126,75 +126,75 @@ mongosh --host localhost --port 27017 mongo-query-test-3/queries/mongo-query.js
 - When to prefer aggregate?
 - If you want to extract parts of the date (day, month, etc.) or apply post-filters. Example:
 
-- db.orders.aggregate([
-- {
--     $match: {
--       Date: {
--         $gte: new Date("2024-05-01T00:00:00Z"),
--         $lt: new Date("2024-06-01T00:00:00Z")
--       }
--     }
-- },
-- {
--     $project: {
--       _id: 0,
--       Date: 1,
--       Amount: 1,
--       dayOfMonth: { $dayOfMonth: "$Date" }
--     }
-- }
-- ])
+db.orders.aggregate([
+{
+$match: {
+Date: {
+$gte: new Date("2024-05-01T00:00:00Z"),
+$lt: new Date("2024-06-01T00:00:00Z")
+}
+}
+},
+{
+$project: {
+_id: 0,
+Date: 1,
+Amount: 1,
+dayOfMonth: { $dayOfMonth: "$Date" }
+}
+}
+])
 
-## 🔎 3. Filter by Amount > 100 and sort by latest
+## 3. Filter by Amount > 100 and sort by latest
 
-- db.orders.find(
-- { Amount: { $gt: 100 } }
-- ).sort({ Date: -1 })
+db.orders.find(
+{ Amount: { $gt: 100 } }
+).sort({ Date: -1 })
 
 - Why use find + sort?
 - We're only filtering and sorting, not transforming data. find is clearer and performant, especially if we create indexes on Amount or Date in production.
 
-## 🔎 4. Aggregate total Amount of transactions per day
+## 4. Aggregate total Amount of transactions per day
 
-- db.orders.aggregate([
-- {
--     $group: {
--       _id: {
--         $dateToString: { format: "%Y-%m-%d", date: "$Date" }
--       },
--       totalAmount: { $sum: "$Amount" }
--     }
-- },
-- { $sort: { \_id: 1 } }
-- ])
+db.orders.aggregate([
+{
+$group: {
+_id: {
+$dateToString: { format: "%Y-%m-%d", date: "$Date" }
+},
+totalAmount: { $sum: "$Amount" }
+}
+},
+{ $sort: { \_id: 1 } }
+])
 
 - Why aggregate is necessary:
 - Grouping and summing fields per day is not possible with find. This is a textbook case for aggregation pipelines.
 
 ## 🔎 5. Count the number of transactions per day
 
-- db.orders.aggregate([
-- {
--     $group: {
--       _id: {
--         $dateToString: { format: "%Y-%m-%d", date: "$Date" }
--       },
--       transactionCount: { $sum: 1 }
--     }
-- },
-- { $sort: { \_id: 1 } }
-- ])
+db.orders.aggregate([
+{
+$group: {
+_id: {
+$dateToString: { format: "%Y-%m-%d", date: "$Date" }
+},
+transactionCount: { $sum: 1 }
+}
+},
+{ $sort: { \_id: 1 } }
+])
 
 - Why aggregate is required:
 - Again, since we are counting by grouping over formatted dates, only aggregate can handle this logic.
 
-## 🐍 Exercise 4 - Python: Exporting Orders from MongoDB (It's inside exercise 3 since it's using Mongo DB)
+## Exercise 4 - Python: Exporting Orders from MongoDB (It's inside exercise 3 since it's using Mongo DB)
 
 This exercise demonstrates how to connect to a MongoDB collection, extract specific fields (`_id`, `Amount`, `Date`), map them to a Python class, and export the results to a CSV file. It also includes proper **exception handling**, **logging**, and **unit tests** to validate functionality.
 
 ---
 
-### 🧾 Problem Statement
+### Problem Statement
 
 > Using the previous MongoDB collection example:  
 > `{ "_id": "ObjectId('60b8d295f1a7f2355e9f1d8c'), "Date": "2024-06-20T15:30:00Z", "Amount": 250.75, "txHash": "..." }`
@@ -210,7 +210,7 @@ This exercise demonstrates how to connect to a MongoDB collection, extract speci
 
 ---
 
-### 📂 Directory Structure
+### Directory Structure
 
 mongo-query-exercise-3/
 └── python-exercise-4/
@@ -220,7 +220,7 @@ mongo-query-exercise-3/
 
 ---
 
-### ⚙️ How It Works
+### How It Works
 
 - The script connects to MongoDB at `mongodb://localhost:27017/`
 - It reads from the database `testdb`, collection `orders`
@@ -231,7 +231,15 @@ mongo-query-exercise-3/
 - Results are exported to a CSV using `pandas`
 - Logs are written to `export_orders.log`
 
-## ⚙️ Exercise 5 - Exercise - Docker Swarm Essentials
+## Exercise 5 - Exercise - Docker Swarm Essentials
+
+Docker Swarm Helper Scripts
+
+To simplify and automate common Docker Swarm operations, this solution includes three shell scripts:
+
+- deploy.sh
+- scale.sh
+- update.sh
 
 Im executing this exercise in folder docker-swar-exercise.
 
@@ -315,3 +323,66 @@ docker service update --env-add MY_VAR=value <service_name>
 8. How do you scale a service?
 
 docker service scale <service_name>=5 # Note: The default replica count in `docker-compose.yml` is 3, but the command below shows how to override and scale it to 5 at runtime.
+
+## Exercise 6 - Git
+
+1. How would you get a repository from a URL?
+
+git clone https://github.com/your-username/fortris-technical-test.git
+
+2. How would you show the differences between two branches?
+
+git diff develop..main
+
+3. How would you commit your changes to the repository?
+
+git add .
+git commit -m "finished all exercises"
+
+## Exercise 7 - Linux
+
+1. Write a command that displays current time of the system
+
+date
+
+# Explanation: This command displays the current system date and time. Example output: 'Mon Apr 1 22:00:00 UTC 2025' - Useful for logging, scripting, and confirming timestamps.
+
+2. Write a command that prints updates on a log file named debug.log in real time, only showing the lines that contain the word “ERROR”
+
+tail -f debug.log | grep "ERROR"
+
+# Explanation: tail -f: continuously monitors the file. grep "ERROR": filters lines in real time that contain the word ERROR.
+
+3. Write a command that prints the size of each directory in a human readable way, sorted by size
+
+du -h --max-depth=1 | sort -hr
+
+# Explanation: du -h: disk usage in human-readable format (e.g., MB, GB). --max-depth=1: only shows top-level folders. sort -hr: sorts by size, biggest first.
+
+4. How would you schedule a task to be executed every Monday at 10pm?
+
+crontab -e
+
+# Then add this line:
+
+0 22 \* \* 1 /ruta/script.sh
+
+# Explanation: 0 22 \* \* 1 means: minute 0, hour 22 (10PM), every day, every month, only on Monday (1). /ruta/script.sh: your shell script to execute.
+
+5. In VI Editor, how would you save changes in a file that was opened in read-only mode?
+
+# Make your changes as usual. Type the following in command mode (Esc to ensure you're not in insert mode):
+
+:w !sudo tee %
+
+# What it does: :w: try to write. !sudo tee %: uses sudo to overwrite the file, where % is the current filename
+
+6. How would you change the ownership of a directory recursively?
+
+sudo chown -R username:groupname /path/to/directory
+
+# Explanation: chown: change ownership. -R: recursive – applies to all files and subdirectories. username: new owner. groupname: (optional) group owner. If you don’t specify it, current group remains. /path/to/directory: the target directory you want to update.
+
+# 📘 Example:
+
+sudo chown -R damian:developers /home/damian/project

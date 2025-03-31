@@ -1,7 +1,8 @@
-// Selecciona base de datos
+// Select ddbb
 db = db.getSiblingDB("testdb");
 
-// Inserta documentos válidos con constructores BSON explícitos
+// Insert valid docs with explicit BSON constructors
+
 db.orders.insertMany([
   {
     _id: new ObjectId("60b8d295f1a7f2355e9f1d8c"),
