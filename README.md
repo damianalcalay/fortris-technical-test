@@ -96,11 +96,11 @@ This exercise demonstrates how to query a MongoDB collection named `orders`, pre
 }
 ```
 
-**## ✅ Run All Queries at Once**
+**## Run All Queries at Once**
 
 All queries from this exercise have been included in a single script for easy testing and validation.
 
-📄 \***\*Script path\*\***: `mongo-query-exercise-3/queries/mongo-query.js`
+\***\*Script path\*\***: `mongo-query-exercise-3/queries/mongo-query.js`
 
 You can execute the entire script with the following command:
 
@@ -204,7 +204,7 @@ db.orders.aggregate([
 - Why aggregate is necessary:
 - Grouping and summing fields per day is not possible with find. This is a textbook case for aggregation pipelines.
 
-**## 🔎 5. Count the number of transactions per day**
+**## 5. Count the number of transactions per day**
 
 ```jsx
 db.orders.aggregate([
@@ -506,6 +506,7 @@ sudo chown -R username:groupname /path/to/directory
 
 **# Explanation: chown: change ownership. -R: recursive – applies to all files and subdirectories. username: new owner. groupname: (optional) group owner. If you don’t specify it, current group remains. /path/to/directory: the target directory you want to update.**
 
-**# 📘 Example:**
-
+**# Example:**
+```jsx
 sudo chown -R damian:developers /home/damian/project
+```
